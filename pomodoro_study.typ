@@ -74,11 +74,13 @@
 ]
 
 // ============================================================
-// 페이지 레이아웃
+// 페이지 레이아웃 (함수로 감싸서 2페이지 복사)
 // ============================================================
 
+#let page-content() = {
+
 // 헤더
-#grid(
+grid(
   columns: (1fr, auto, auto),
   align: horizon,
   column-gutter: 14pt,
@@ -87,10 +89,10 @@
   [이름: #underline-field(w: 70pt)],
 )
 
-#v(9pt)
+v(9pt)
 
-// 4세션 그리드 (2×2)  — rows: 278pt × 2
-#grid(
+// 4세션 그리드 (2×2)
+grid(
   columns: (1fr, 1fr),
   rows: (230pt, 230pt),
   column-gutter: 10pt,
@@ -101,10 +103,10 @@
   session-block(4),
 )
 
-#v(10pt)
+v(10pt)
 
 // 수업 리뷰 섹션
-#block(
+block(
   width: 100%,
   stroke: 1.3pt + rgb("#3498db"),
   radius: 9pt,
@@ -148,3 +150,11 @@
     ],
   )
 ]
+} // end page-content
+
+// 1페이지
+#page-content()
+
+// 2페이지 (양면 인쇄용 복사)
+#pagebreak()
+#page-content()
